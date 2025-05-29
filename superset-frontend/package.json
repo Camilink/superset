@@ -337,7 +337,7 @@
     "jsdom": "^26.0.0",
     "lerna": "^8.2.1",
     "less": "^4.2.0",
-    "less-loader": "^12.2.0",
+    "less-loader": "^12.3.0",
     "mini-css-extract-plugin": "^2.9.0",
     "open-cli": "^8.0.0",
     "po2json": "^0.4.5",
