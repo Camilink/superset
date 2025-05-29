@@ -270,8 +270,10 @@ FROM apache/superset:3.0.0
 RUN pip install Pillow==10.0.0 psycopg2-binary==2.9.7
 
 # Copia tu archivo de configuración (si es necesario)
-COPY superset_config.py /app/
+COPY FROM apache/superset:3.0.0
 
+# Copia el archivo desde la subcarpeta
+COPY ./docker/pythonpath_dev/superset_config.py /app/superset_config.py
 # Opcional: Comandos para inicializar Superset
 USER root
 RUN superset db upgrade && \
