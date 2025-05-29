@@ -53,7 +53,7 @@ WORKDIR /app/superset-frontend
 
 # Create necessary folders to avoid errors in subsequent steps
 RUN mkdir -p /app/superset/static/assets \
-             /app/superset/translations
+            /app/superset/translations
 
 # Mount package files and install dependencies if not in dev mode
 # NOTE: we mount packages and plugins as they are referenced in package.json as workspaces
@@ -261,3 +261,22 @@ USER root
 RUN uv pip install .[postgres]
 USER superset
 CMD ["/app/docker/entrypoints/docker-ci.sh"]
+
+
+# Usa la imagen oficial de Superset como base
+FROM apache/superset:3.0.0  
+
+# Instala Pillow y otras dependencias
+RUN pip install Pillow==10.0.0 psycopg2-binary==2.9.7
+
+# Copia tu archivo de configuración (si es necesario)
+COPY superset_config.py /app/
+
+# Opcional: Comandos para inicializar Superset
+USER root
+RUN superset db upgrade && \
+    superset init
+USER superset
+
+# Puerto expuesto (Render lo maneja automáticamente)
+EXPOSE 8088

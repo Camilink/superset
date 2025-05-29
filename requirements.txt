@@ -1,0 +1,34 @@
+# Core Superset requirements
+apache-superset==3.0.0  # or your specific version
+Flask==2.3.2
+Werkzeug==2.3.7
+SQLAlchemy==1.4.48
+psycopg2-binary==2.9.7  # For PostgreSQL
+PyMySQL==1.0.3  # For MySQL
+redis==4.5.5  # For caching
+celery==5.3.1
+flower==1.2.0  # Optional: Celery monitoring
+
+# Required for image processing (screenshots/PDFs)
+Pillow==10.0.0  # Fixes "No PIL installation found" warnings
+
+# Database drivers (pick those you need)
+pyodbc==4.0.35  # For MS SQL
+pymssql==2.2.7
+presto-python-client==0.8.3
+pyhive==0.6.5
+thrift-sasl==0.4.3
+
+# Additional utilities
+pandas==2.0.3
+numpy==1.24.3
+pyarrow==12.0.1  # For improved performance
+cryptography==41.0.3  # For security
+python-dotenv==1.0.0  # For environment variables
+
+# Gunicorn (production WSGI server)
+gunicorn==20.1.0
+gevent==22.10.2  # Optional: For async workers
+
+# Render-specific (if needed)
+render-engine==0.4.0  # Optional utilities for Render
