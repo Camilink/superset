@@ -270,7 +270,7 @@ FROM apache/superset:3.0.0
 RUN pip install Pillow==10.0.0 psycopg2-binary==2.9.7
 
 # Copy your config file (make sure it exists in your build context)
-COPY superset_config.py /app/superset_config.py
+COPY docker/pythonpath_dev/superset_config.py /app/superset_config.py
 
 # Initialize Superset
 USER root
