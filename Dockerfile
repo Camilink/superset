@@ -263,22 +263,20 @@ USER superset
 CMD ["/app/docker/entrypoints/docker-ci.sh"]
 
 
-# Usa la imagen oficial de Superset como base
-FROM apache/superset:3.0.0  
+# Use official Superset image as base
+FROM apache/superset:3.0.0
 
-# Instala Pillow y otras dependencias
+# Install dependencies
 RUN pip install Pillow==10.0.0 psycopg2-binary==2.9.7
 
-# Copia tu archivo de configuración (si es necesario)
-COPY FROM apache/superset:3.0.0
+# Copy your config file (make sure it exists in your build context)
+COPY superset_config.py /app/superset_config.py
 
-# Copia el archivo desde la subcarpeta
-COPY ./docker/pythonpath_dev/superset_config.py /app/superset_config.py
-# Opcional: Comandos para inicializar Superset
+# Initialize Superset
 USER root
 RUN superset db upgrade && \
     superset init
 USER superset
 
-# Puerto expuesto (Render lo maneja automáticamente)
+# Expose port
 EXPOSE 8088
