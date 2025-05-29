@@ -29,7 +29,30 @@ from flask_caching.backends.filesystemcache import FileSystemCache
 
 logger = logging.getLogger()
 
-SUPERSET_SECRET_KEY="9gY89KnXjpDe1K/G2g8J6p2V1VOez9CVPg5HVpSqbeW6gyP4llemqSy2"
+
+# superset_config.py
+import os
+
+SECRET_KEY = os.getenv("SUPERSET_SECRET_KEY")  # Obligatorio para producción
+ENABLE_PROXY_FIX = True  # Necesario en Render
+
+TALISMAN_ENABLED = False
+WTF_CSRF_ENABLED = False
+
+SQLALCHEMY_DATABASE_URI = 'postgres://u5mh9fi08iuct0:pb0d6bd9f0e847a780e5403a376a825847485c97a50a2dd1459a86dc144440ced@ca932070ke6bv1.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d50aqolcf988ab'
+SUPERSET_WEBSERVER_PORT = 8088
+FEATURE_FLAGS = {"EMBEDDED_SUPERSET": True, "EMBEDDABLE_CHARTS": True,
+    "DASHBOARD_RBAC": True}
+
+    # CORS Enabling 
+ENABLE_CORS = True 
+CORS_OPTIONS = { 
+    "supports_credentials": True, 
+    "allow_headers": "*", 
+    "expose_headers": "*", 
+    "resources": "*", 
+    "origins": ["http://localhost:3000","https://bloodpoint-core-qa-35c4ecec4a30.herokuapp.com/"]  
+    }
 
 DATABASE_DIALECT = os.getenv("DATABASE_DIALECT")
 DATABASE_USER = os.getenv("DATABASE_USER")
@@ -138,3 +161,5 @@ try:
     )
 except ImportError:
     logger.info("Using default Docker config...")
+
+
