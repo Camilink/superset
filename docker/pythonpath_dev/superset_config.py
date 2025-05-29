@@ -54,6 +54,15 @@ CORS_OPTIONS = {
     "origins": ["http://localhost:3000","https://bloodpoint-core-qa-35c4ecec4a30.herokuapp.com/"]  
     }
 
+# Configuración para Render
+ENABLE_PROXY_FIX = True  # Necesario detrás del proxy de Render
+TALISMAN_CONFIG = {
+    'content_security_policy': None,
+    'force_https': False  # Render maneja HTTPS
+}
+
+
+
 DATABASE_DIALECT = os.getenv("DATABASE_DIALECT")
 DATABASE_USER = os.getenv("DATABASE_USER")
 DATABASE_PASSWORD = os.getenv("DATABASE_PASSWORD")
